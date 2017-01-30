@@ -18,10 +18,8 @@ class Page(object):
 
     def __init__(self, testsetup):
         '''Constructor'''
-        self.testsetup = testsetup
-        self.base_url = testsetup.base_url
-        self.selenium = testsetup.selenium
-        self.timeout = testsetup.timeout
+        self.base_url = testsetup.current_url
+        self.selenium = testsetup
 
     @property
     def olb_title(self):
@@ -46,7 +44,7 @@ class Page(object):
 
     def olb_text(self, locator):
        return self.selenium.find_element(*locator).text
-        
+
     def olb_send_keys(self, locator, value):
         if value == '' or value == [] or value is None or value == {} or value == ():
             return

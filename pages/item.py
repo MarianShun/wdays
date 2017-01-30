@@ -4,10 +4,10 @@
  
 from selenium.webdriver.common.by import By
  
-from general_page import Page
+from pages.general_page import Page
  
  
-class ListPage(Page):
+class ItemPage(Page):
  
     @property
     def item_name(self):
@@ -15,17 +15,18 @@ class ListPage(Page):
         return self.olb_find_element(_item_name_locator)
   
     @property
-    def is_success_message(self):
+    def is_article_not_found(self):
         result = False
-        mes = self.selenium.find_elements_by_class_name('note-msg')
+        _no_article_message_locator = By.CLASS_NAME, "mbox-text"
+        mes = self.selenium.find_elements(*_no_article_message_locator)
         if mes:
-            if u'Der er ikke nogen produkter, som matcher de kriterier, du har angivet.' in mes[0].text\
-                    or u'Vi fandt desværre ingen varer, som passer til dine søgekriterier.' in mes[0].text:
+            if u'Вікіпедія не має статті з саме цією назвою' in mes[0].text or \
+                            self.olb_title == u'Вікіпедія':  # Wiki main page
                 result = True
         return result
         
     @property
-    def some_steps_with_item():
+    def some_steps_with_item(self):
         pass
         
     def click_save(self):
