@@ -5,7 +5,8 @@ import pytest
 from pages.list import ItemList
 from pages.item import ItemPage
 from data.urls import urls
- 
+
+
 class Test404:
     @pytest.mark.nondestructive
     @pytest.mark.parametrize('url', urls)
@@ -19,4 +20,3 @@ class Test404:
         item_list = ItemList(selenium)
         assert item_list.is_success_message
         assert not item_list.is_item_in_list(item_name)
-        
