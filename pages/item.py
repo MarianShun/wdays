@@ -8,6 +8,7 @@ from pages.general_page import Page
  
  
 class ItemPage(Page):
+    _search_locator = (By.ID, "searchInput")
  
     @property
     def item_name(self):
@@ -24,10 +25,17 @@ class ItemPage(Page):
                             self.olb_title == u'Вікіпедія':  # Wiki main page
                 result = True
         return result
-        
-    @property
+
     def some_steps_with_item(self):
         pass
+
+    @property
+    def is_search_field_present(self):
+        search_field = self.selenium.find_elements(*self._search_locator)
+        if search_field:
+            return True
+        else:
+            return False
         
     def click_save(self):
         _save_locator = (By.ID, 'name')
